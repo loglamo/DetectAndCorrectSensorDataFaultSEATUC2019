@@ -24,13 +24,13 @@ index <- length(data.drift[1:2000])
 index <- c(1:2000) #take index
 par()
 par(opar <- par())
-plot(index, data.drift[1:2000], type="n", main="malf_9", ylab="Temperature", cex.main=1.0,  cex.lab=1.0, cex.axis=1.0) # draw plot
+plot(index, data.drift[1:2000], type="n", main="", ylab="Temperature", xlab="Points of data", cex.main=1.0,  cex.lab=1.0, cex.axis=1.0) # draw plot
 lines(index, data.drift[1:2000], type="l",col="blue") # draw line in plot
 
 result <- data.drift[1:600]
 time.detecting <- c()
 time.correcting <- c()
-for(i in c(601:1050)){
+for(i in c(601:2000)){
   start.time.detecting <- Sys.time()
   modelI <- HoltWinters(ts(result[(i-577):(i-1)], frequency = 288),alpha = alpha,gamma = gamma)
   data.forecastI <- forecast(modelI,h = 1)
@@ -55,5 +55,5 @@ index_result <- length(result)
 index_result <- c(1:index_result) #take index
 par()
 par(opar <- par())
-plot(index_result, result, type="n", main="corrected_malf9", ylab="Temperature", cex.main=1.0,  cex.lab=1.0, cex.axis=1.0) # draw plot
+plot(index_result, result, type="n", main="", ylab="Temperature", xlab="Points of data",  cex.main=1.0,  cex.lab=1.0, cex.axis=1.0) # draw plot
 lines(index_result, result, type="l",col="blue") # draw line in plot

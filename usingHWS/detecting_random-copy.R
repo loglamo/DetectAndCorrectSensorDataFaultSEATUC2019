@@ -28,43 +28,26 @@ index <- length(data.drift)
 index <- c(1:2000) #take index
 par()
 par(opar <- par())
-plot(index, data.drift[1:2000], type="n", main="random_9", ylab="Temperature", cex.main=1.0,  cex.lab=1.0, cex.axis=1.0) # draw plot
+plot(index, data.drift[1:2000], type="n", main="", ylab="Temperature", xlab="Points of data", cex.main=1.0,  cex.lab=1.0, cex.axis=1.0) # draw plot
 lines(index, data.drift[1:2000], type="l",col="blue") # draw line in plot
 
 result <- data.drift[1:600]
-time.detecting <- c()
-time.correcting <- c()
-
-
-for(i in c(601:1000)){
-  start.time.detecting <- Sys.time()
+for(i in c(601:2000)){
   modelI <- HoltWinters(ts(result[(i-577):(i-1)], frequency = 288),alpha = alpha,gamma = gamma)
   data.forecastI <- forecast(modelI,h = 1)
   data.real <- data.drift[i]
   if((data.real < (data.forecastI$lower[,2]-3))||(data.real > (data.forecastI$upper[,2]+3))){
     print("Having fault............")
-    end.time.detecting <- Sys.time()
-    start.time.correcting <- Sys.time()
     result <- c(result, runif(1, min=data.forecastI$lower[,2], max=data.forecastI$upper[,2]))
-    end.time.correcting <- Sys.time()
-    time.taken.detecting <- end.time.detecting - start.time.detecting
-    time.taken.correcting <- end.time.correcting - start.time.correcting
-    time.detecting <- c(time.detecting,time.taken.detecting)
-    time.correcting <- c(time.correcting, time.taken.correcting)
-    
   }else{
     print("Normal status.....")
     result <- c(result, data.real)
-  
   }
 }
-
 
 index_result <- length(result)
 index_result <- c(1:index_result) #take index
 par()
 par(opar <- par())
-plot(index_result, result, type="n", main="corrected_random9", ylab="Temperature", cex.main=1.0,  cex.lab=1.0, cex.axis=1.0) # draw plot
+plot(index_result, result, type="n", main="", ylab="Temperature", xlab="Points of data", cex.main=1.0,  cex.lab=1.0, cex.axis=1.0) # draw plot
 lines(index_result, result, type="l",col="blue") # draw line in plot
-
-Time <- read.csv(file = '/home/la/FaultSensorData_Detecting_Correcting')
