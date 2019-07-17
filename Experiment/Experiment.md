@@ -37,7 +37,7 @@ Cài đặt thư viện paho-mqtt, để tạo các client.
 
 [Cài đặt paho-mqtt](https://pypi.org/project/paho-mqtt/)
 
-Tạo các client Publish và Subscribe tương tự [hướng dẫ n cơ bản paho](http://www.steves-internet-guide.com/into-mqtt-python-client/).
+Tạo các client Publish và Subscribe tương tự [hướng dẫn cơ bản paho](http://www.steves-internet-guide.com/into-mqtt-python-client/).
 
     python SubData // nhận dữ liệu từ topic 
     python CollectData.py // thực thi lấy dữ liệu và gửi tới Broker
